@@ -2,7 +2,7 @@ package com.montreal.Blog.Pessoal.controller;
 
 import com.montreal.Blog.Pessoal.model.Tema;
 import com.montreal.Blog.Pessoal.service.TemaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,11 +13,18 @@ import java.util.List;
 @RequestMapping("/temas")
 public class TemaController {
 
-    @Autowired
-    private TemaService temaService;
+    private final TemaService temaService;
+
+    public TemaController(TemaService temaService) {
+        this.temaService = temaService;
+    }
 
     @GetMapping
-    public List<Tema> getTemas() {
-        return temaService.listarTemas();
+    public ResponseEntity<List<Tema>> getTemas() {
+        List<Tema> temas = temaService.listarTemas();
+        if (temas.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(temas);
     }
 }

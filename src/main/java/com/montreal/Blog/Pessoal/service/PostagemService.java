@@ -1,4 +1,3 @@
-// File: src/main/java/com/montreal/Blog/Pessoal/service/PostagemService.java
 package com.montreal.Blog.Pessoal.service;
 
 import com.montreal.Blog.Pessoal.model.Postagem;
