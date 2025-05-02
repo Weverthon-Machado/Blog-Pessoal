@@ -21,10 +21,10 @@ public class TemaController {
 
     @GetMapping
     public ResponseEntity<List<Tema>> getTemas() {
-        List<Tema> temas = temaService.listarTemas();
-        if (temas.isEmpty()) {
+        List<Tema> temps = temaService.listarTemas();
+        if (temps.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(temas);
+        return ResponseEntity.ok(temps);
     }
 }

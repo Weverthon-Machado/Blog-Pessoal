@@ -28,4 +28,7 @@ public class Usuario {
 
     public Usuario() {}
 
+    public Object getUsuario() {
+        return null;
+    }
 }
