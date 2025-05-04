@@ -4,30 +4,28 @@ import com.montreal.Blog.Pessoal.model.Usuario;
 import com.montreal.Blog.Pessoal.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class UsuarioService {
     @Autowired
     private UsuarioRepository usuarioRepository;
-    private Long id;
 
     public List<Usuario> buscarUsuarios() {
         return usuarioRepository.findAll();
     }
 
     public Usuario buscarUsuario(Long id) {
-        this.id = id;
         Optional<Usuario> usuario = usuarioRepository.findById(id);
         return usuario.orElse(null);
     }
 
     public Usuario cadastrarUsuario(@Valid Usuario usuarioRequest) {
-        if(!(null == usuarioRepository.findByUsuario(usuarioRequest.getUsuario()))) {
+        if (usuarioRepository.findByEmail(usuarioRequest.getEmail()).isPresent()) {
             throw new RuntimeException("Este email já foi cadastrado");
         }
         return usuarioRepository.save(usuarioRequest);
@@ -35,13 +33,10 @@ public class UsuarioService {
 
     @Transactional
     public Usuario atualizarUsuario(Long id, @Valid Usuario usuarioRequest) {
-        Optional<Usuario> usuarioOptional = usuarioRepository.findById(id);
-
-        if (usuarioOptional.isPresent()) {
+        if (usuarioRepository.findById(id).isPresent()) {
             usuarioRequest.setId(id);
             return usuarioRepository.save(usuarioRequest);
-        }
-        else{
+        } else {
             throw new RuntimeException("Usuario não encontrado");
         }
     }
@@ -52,5 +47,4 @@ public class UsuarioService {
                 .orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
         usuarioRepository.delete(usuario);
     }
-
 }

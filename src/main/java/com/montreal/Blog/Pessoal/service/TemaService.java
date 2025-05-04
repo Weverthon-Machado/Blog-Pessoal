@@ -14,14 +14,12 @@ import java.util.Optional;
 public class TemaService {
     @Autowired
     private TemaRepository temaRepository;
-    private Long id;
 
     public List<Tema> buscarTemas() {
         return temaRepository.findAll();
     }
 
     public Tema buscarTema(Long id) {
-        this.id = id;
         Optional<Tema> tema = temaRepository.findById(id);
         return tema.orElse(null);
     }
@@ -37,8 +35,7 @@ public class TemaService {
         if (temaOptional.isPresent()) {
             tema.setId(id);
             return temaRepository.save(tema);
-        }
-        else{
+        } else {
             throw new RuntimeException("Tema não encontrado");
         }
     }

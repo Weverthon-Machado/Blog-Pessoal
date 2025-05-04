@@ -22,6 +22,15 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Usuario> buscarUsuario(@PathVariable Long id) {
+        Usuario usuario = usuarioService.buscarUsuario(id);
+        if (usuario != null) {
+            return ResponseEntity.ok(usuario);
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping("/cadastrar")
     public ResponseEntity<Usuario> cadastrar(@Valid @RequestBody Usuario usuario) {
         if (usuario == null || usuario.getEmail() == null || usuario.getSenha() == null) {
