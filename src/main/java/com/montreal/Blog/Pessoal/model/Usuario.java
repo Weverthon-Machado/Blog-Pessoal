@@ -22,6 +22,5 @@ public class Usuario {
     private String senha;
     private String foto;
 
-    // Getters e Setters
 
 }

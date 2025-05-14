@@ -9,3 +9,4 @@ public class BlogPessoalApplication {
 		SpringApplication.run(BlogPessoalApplication.class, args);
 	}
 }
+

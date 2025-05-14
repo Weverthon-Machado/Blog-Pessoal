@@ -39,5 +39,4 @@ public class Postagem {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-
 }

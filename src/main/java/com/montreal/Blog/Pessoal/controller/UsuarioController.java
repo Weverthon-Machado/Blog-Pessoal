@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -31,6 +32,14 @@ public class UsuarioController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping
+    public ResponseEntity<List<Usuario>> buscarUsuarios() {
+        List<Usuario> usuarios = usuarioService.buscarUsuarios();
+        if (!usuarios.isEmpty()) {
+            return ResponseEntity.ok(usuarios);
+        }
+        return ResponseEntity.noContent().build();
+    }
     @PostMapping("/cadastrar")
     public ResponseEntity<Usuario> cadastrar(@Valid @RequestBody Usuario usuario) {
         if (usuario == null || usuario.getEmail() == null || usuario.getSenha() == null) {
