@@ -2,6 +2,7 @@ package com.montreal.Blog.Pessoal.controller;
 
 import com.montreal.Blog.Pessoal.model.Tema;
 import com.montreal.Blog.Pessoal.service.TemaService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,14 @@ public class TemaController {
 
     @GetMapping
     public ResponseEntity<List<Tema>> getTemas() {
-        List<Tema> temps = temaService.listarTemas();
-        if (temps.isEmpty()) {
-            return ResponseEntity.noContent().build();
+        try {
+            List<Tema> temps = temaService.listarTemas();
+            if (temps.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(temps);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-        return ResponseEntity.ok(temps);
     }
 }

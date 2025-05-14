@@ -12,13 +12,16 @@ public class ResourceController {
 
     @GetMapping
     public ResponseEntity<String> getResource() {
-
-        boolean resourceExists = false;
+        boolean resourceExists = checkIfResourceExists();
 
         if (!resourceExists) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Recurso não encontrado");
         }
 
         return ResponseEntity.ok("Recurso encontrado");
+    }
+
+    private boolean checkIfResourceExists() {
+        return false;
     }
 }

@@ -1,5 +1,6 @@
 package com.montreal.Blog.Pessoal.DTO;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,6 +8,7 @@ import lombok.Setter;
 @Getter
 public class TemaDTO {
     private Long id;
-    private String descricao;
 
+    @NotBlank(message = "A descrição é obrigatória")
+    private String descricao;
 }

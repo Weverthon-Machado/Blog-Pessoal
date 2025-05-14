@@ -35,13 +35,19 @@ public class PostagemService {
         Optional<Postagem> postagemOptional = postagemRepository.findById(id);
 
         if (postagemOptional.isPresent()) {
-            postagem.setId(id);
-            return postagemRepository.save(postagem);
-        }
-        else{
-            throw new RuntimeException("Postagem não encontrado");
+            Postagem postagemExistente = postagemOptional.get();
+            postagemExistente.setTitulo(postagem.getTitulo());
+            postagemExistente.setTexto(postagem.getTexto());
+            postagemExistente.setData(postagem.getData());
+            postagemExistente.setTema(postagem.getTema());
+            postagemExistente.setUsuario(postagem.getUsuario());
+
+            return postagemRepository.save(postagemExistente);
+        } else {
+            throw new RuntimeException("Postagem não encontrada");
         }
     }
+
 
     @Transactional
     public void deletarPostagem(Long id) {
