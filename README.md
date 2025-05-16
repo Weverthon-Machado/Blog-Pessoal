@@ -77,36 +77,6 @@ public ResponseEntity<Postagem> create(@RequestBody Postagem postagem) {
 }
 ```
 
-## Modelos
-### Postagem
-A classe `Postagem` representa uma postagem de blog:
-
-```java
-@Entity
-@Table(name = "postagens")
-public class Postagem {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String titulo;
-
-    @Column(columnDefinition = "TEXT")
-    private String conteudo;
-
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
-
-    @ManyToOne
-    @JoinColumn(name = "tema_id")
-    private Tema tema;
-
-    public Postagem() {}
-}
-```
-
 ## Executando o Projeto
 Para executar o projeto, utilize o seguinte comando Maven:
 
