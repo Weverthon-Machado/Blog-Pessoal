@@ -44,7 +44,6 @@ public class PostagemController {
             Postagem postagem = postagemService.atualizarPostagem(id, postagemRequest);
             return ResponseEntity.status(HttpStatus.CREATED).body(postagem);
         } catch (Exception e) {
-            // Retorne um ResponseEntity com ErrorDTO para erros
             ErrorDTO errorDTO = new ErrorDTO("Erro ao atualizar postagem", e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorDTO);
         }

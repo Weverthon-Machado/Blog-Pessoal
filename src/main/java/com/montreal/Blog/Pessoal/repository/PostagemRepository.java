@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface PostagemRepository extends JpaRepository<Postagem, Long> {
 
-    @Query("SELECT p FROM Postagem p WHERE p.autor.id = :autorId AND p.tema.id = :temaId")
+    @Query("SELECT p FROM Postagem p WHERE p.usuario.id = :autorId AND p.tema.id = :temaId")
     List<Postagem> filtrarPorAutorETema(@Param("autorId") Long autorId, @Param("temaId") Long temaId);
 }
