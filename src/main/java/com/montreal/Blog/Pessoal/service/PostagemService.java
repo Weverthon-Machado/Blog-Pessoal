@@ -47,8 +47,6 @@ public class PostagemService {
             throw new RuntimeException("Postagem não encontrada");
         }
     }
-
-
     @Transactional
     public void deletarPostagem(Long id) {
         Postagem postagem = postagemRepository.findById(id)

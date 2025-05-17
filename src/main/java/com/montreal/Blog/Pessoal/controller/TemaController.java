@@ -23,11 +23,11 @@ public class TemaController {
     @GetMapping
     public ResponseEntity<List<Tema>> getTemas() {
         try {
-            List<Tema> temps = temaService.listarTemas();
-            if (temps.isEmpty()) {
+            List<Tema> temas = temaService.buscarTemas();
+            if (temas.isEmpty()) {
                 return ResponseEntity.noContent().build();
             }
-            return ResponseEntity.ok(temps);
+            return ResponseEntity.ok(temas);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }

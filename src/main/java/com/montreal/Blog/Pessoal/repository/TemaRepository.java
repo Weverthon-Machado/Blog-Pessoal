@@ -9,6 +9,6 @@ import java.util.List;
 
 public interface TemaRepository extends JpaRepository<Tema, Long> {
 
-    @Query("SELECT t FROM Tema t WHERE t.nome LIKE %:nome%")
-    List<Tema> findByNomeContaining(@Param("nome") String nome);
+    @Query("SELECT t FROM Tema t WHERE t.descricao LIKE %:descricao%")
+    List<Tema> buscarPorDescricao(@Param("descricao") String descricao);
 }

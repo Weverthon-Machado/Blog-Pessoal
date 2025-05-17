@@ -48,6 +48,6 @@ public class TemaService {
     }
 
     public List<Tema> listarTemas() {
-        return List.of();
+        return temaRepository.findAll();
     }
 }
