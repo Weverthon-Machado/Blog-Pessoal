@@ -1,5 +1,7 @@
 package com.montreal.Blog.Pessoal.service;
 
+import com.montreal.Blog.Pessoal.exception.EmailJaCadastradoException;
+import com.montreal.Blog.Pessoal.exception.UsuarioNaoEncontradoException;
 import com.montreal.Blog.Pessoal.model.Usuario;
 import com.montreal.Blog.Pessoal.repository.UsuarioRepository;
 import jakarta.transaction.Transactional;
@@ -26,18 +28,18 @@ public class UsuarioService {
 
     public Usuario cadastrarUsuario(@Valid Usuario usuarioRequest) {
         if (usuarioRepository.findByEmail(usuarioRequest.getEmail()).isPresent()) {
-            throw new RuntimeException("Este email já foi cadastrado");
+            throw new EmailJaCadastradoException("Este email já foi cadastrado");
         }
         return usuarioRepository.save(usuarioRequest);
     }
-
     @Transactional
     public Usuario atualizarUsuario(Long id, @Valid Usuario usuarioRequest) {
         if (usuarioRepository.findById(id).isPresent()) {
             usuarioRequest.setId(id);
             return usuarioRepository.save(usuarioRequest);
         } else {
-            throw new RuntimeException("Usuario não encontrado");
+            throw new UsuarioNaoEncontradoException("Usuário com ID " + id + " não encontrado");
+
         }
     }
 

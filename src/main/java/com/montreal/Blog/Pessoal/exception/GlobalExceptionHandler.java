@@ -35,4 +35,16 @@ public class GlobalExceptionHandler {
         ErrorDTO errorDTO = new ErrorDTO("Erro interno no servidor", ex.getMessage());
         return new ResponseEntity<>(errorDTO, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+    @ExceptionHandler(UsuarioNaoEncontradoException.class)
+    public ResponseEntity<ErrorDTO> handleUsuarioNaoEncontradoException(UsuarioNaoEncontradoException ex) {
+        ErrorDTO errorDTO = new ErrorDTO("Usuário não encontrado", ex.getMessage());
+        return new ResponseEntity<>(errorDTO, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(EmailJaCadastradoException.class)
+    public ResponseEntity<ErrorDTO> handleEmailJaCadastrado(EmailJaCadastradoException ex) {
+        ErrorDTO errorDTO = new ErrorDTO("Erro ao cadastrar usuário", ex.getMessage());
+        return new ResponseEntity<>(errorDTO, HttpStatus.BAD_REQUEST);
+    }
+
 }
